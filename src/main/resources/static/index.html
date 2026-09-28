@@ -1,64 +1,519 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>StudyBuddy</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyBuddy | Study Group Management</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<header><h1>StudyBuddy</h1><p>Study Group Management System</p></header>
 
-<main>
-<section class="card">
-<h2>Add Student</h2>
-<form id="studentForm">
-<input id="studentName" placeholder="Student name" required>
-<input id="studentEmail" type="email" placeholder="Email" required>
-<input id="studentDepartment" placeholder="Department" required>
-<button type="submit">Add Student</button>
-</form>
-<p id="studentMsg" class="msg"></p>
-</section>
+<div class="app">
 
-<section class="card">
-<h2>Add Subject</h2>
-<form id="subjectForm">
-<input id="subjectName" placeholder="Subject name" required>
-<button type="submit">Add Subject</button>
-</form>
-<p id="subjectMsg" class="msg"></p>
-</section>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
 
-<section class="card">
-<h2>Create Study Group</h2>
-<form id="groupForm">
-<input id="groupName" placeholder="Group name" required>
-<input id="groupDescription" placeholder="Description" required>
-<input id="groupCapacity" type="number" min="1" placeholder="Capacity" required>
-<input id="groupSubjectId" type="number" min="1" placeholder="Subject ID" required>
-<button type="submit">Create Group</button>
-</form>
-<p id="groupMsg" class="msg"></p>
-</section>
+        <div class="brand">
+            <div class="brand-logo">SB</div>
+            <div>
+                <h2>StudyBuddy</h2>
+                <span>Study Group Management</span>
+            </div>
+        </div>
 
-<section class="card">
-<h2>Join Group</h2>
-<form id="joinForm">
-<input id="joinStudentId" type="number" min="1" placeholder="Student ID" required>
-<input id="joinGroupId" type="number" min="1" placeholder="Group ID" required>
-<button type="submit">Join</button>
-</form>
-<p id="joinMsg" class="msg"></p>
-</section>
+        <div class="menu-title">MAIN MENU</div>
 
-<section class="card">
-<h2>Current Data</h2>
-<button onclick="loadAll()">Refresh</button>
-<div id="output"></div>
-</section>
-</main>
+        <button class="nav-item active" onclick="showSection('dashboard', this)">
+            <span class="nav-icon">D</span>
+            Dashboard
+        </button>
+
+        <button class="nav-item" onclick="showSection('students', this)">
+            <span class="nav-icon">S</span>
+            Students
+        </button>
+
+        <button class="nav-item" onclick="showSection('subjects', this)">
+            <span class="nav-icon">B</span>
+            Subjects
+        </button>
+
+        <button class="nav-item" onclick="showSection('groups', this)">
+            <span class="nav-icon">G</span>
+            Study Groups
+        </button>
+
+        <button class="nav-item" onclick="showSection('memberships', this)">
+            <span class="nav-icon">M</span>
+            Memberships
+        </button>
+
+        <div class="sidebar-bottom">
+            <div class="system-card">
+                <div class="status-dot"></div>
+                <div>
+                    <strong>System Online</strong>
+                    <small>StudyBuddy is running</small>
+                </div>
+            </div>
+        </div>
+
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <div>
+                <h1 id="pageTitle">Dashboard</h1>
+                <p id="pageSubtitle">Manage your study community</p>
+            </div>
+
+            <div class="profile">
+                <div class="profile-avatar">A</div>
+                <div>
+                    <strong>Student Admin</strong>
+                    <small>StudyBuddy User</small>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- DASHBOARD -->
+        <section id="dashboard" class="page-section active">
+
+            <div class="welcome">
+                <div>
+                    <span class="welcome-label">STUDY GROUP MANAGEMENT</span>
+                    <h2>Welcome to StudyBuddy</h2>
+                    <p>Create study groups, manage students and connect learners by subject.</p>
+                </div>
+
+                <button class="primary-btn" onclick="showSection('groups')">
+                    Explore Study Groups
+                </button>
+            </div>
+
+
+            <div class="stats-grid">
+
+                <div class="stat-card blue">
+                    <div class="stat-icon">S</div>
+                    <div>
+                        <span>Students</span>
+                        <strong id="studentCount">0</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card purple">
+                    <div class="stat-icon">B</div>
+                    <div>
+                        <span>Subjects</span>
+                        <strong id="subjectCount">0</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card teal">
+                    <div class="stat-icon">G</div>
+                    <div>
+                        <span>Study Groups</span>
+                        <strong id="groupCount">0</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card green">
+                    <div class="stat-icon">M</div>
+                    <div>
+                        <span>Memberships</span>
+                        <strong id="membershipCount">0</strong>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-grid">
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <div>
+                            <h3>Quick Actions</h3>
+                            <p>Manage your study community</p>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions">
+
+                        <button onclick="openModal('studentModal')">
+                            <div class="quick-icon blue-bg">+</div>
+                            <div>
+                                <strong>Add Student</strong>
+                                <span>Register a new student</span>
+                            </div>
+                        </button>
+
+                        <button onclick="openModal('subjectModal')">
+                            <div class="quick-icon purple-bg">+</div>
+                            <div>
+                                <strong>Add Subject</strong>
+                                <span>Create a new subject</span>
+                            </div>
+                        </button>
+
+                        <button onclick="openModal('groupModal')">
+                            <div class="quick-icon teal-bg">+</div>
+                            <div>
+                                <strong>Create Group</strong>
+                                <span>Start a study group</span>
+                            </div>
+                        </button>
+
+                    </div>
+                </div>
+
+
+                <div class="panel">
+                    <div class="panel-header">
+                        <div>
+                            <h3>Platform Overview</h3>
+                            <p>Current system activity</p>
+                        </div>
+                    </div>
+
+                    <div class="overview-list">
+
+                        <div>
+                            <span class="overview-dot blue-dot"></span>
+                            <span>Students registered</span>
+                            <strong id="overviewStudents">0</strong>
+                        </div>
+
+                        <div>
+                            <span class="overview-dot purple-dot"></span>
+                            <span>Subjects available</span>
+                            <strong id="overviewSubjects">0</strong>
+                        </div>
+
+                        <div>
+                            <span class="overview-dot teal-dot"></span>
+                            <span>Active study groups</span>
+                            <strong id="overviewGroups">0</strong>
+                        </div>
+
+                        <div>
+                            <span class="overview-dot green-dot"></span>
+                            <span>Total memberships</span>
+                            <strong id="overviewMemberships">0</strong>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- STUDENTS -->
+        <section id="students" class="page-section">
+
+            <div class="section-toolbar">
+                <div>
+                    <h2>Students</h2>
+                    <p>Manage students registered in StudyBuddy.</p>
+                </div>
+
+                <button class="primary-btn" onclick="openModal('studentModal')">
+                    + Add Student
+                </button>
+            </div>
+
+            <div class="search-box">
+                <input type="text" id="studentSearch"
+                       placeholder="Search students..."
+                       onkeyup="filterStudents()">
+            </div>
+
+            <div class="panel">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Student Name</th>
+                            <th>Email</th>
+                            <th>Department</th>
+                            <th>Year</th>
+                        </tr>
+                        </thead>
+                        <tbody id="studentTable">
+                        <tr>
+                            <td colspan="5" class="empty">Loading students...</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- SUBJECTS -->
+        <section id="subjects" class="page-section">
+
+            <div class="section-toolbar">
+                <div>
+                    <h2>Subjects</h2>
+                    <p>Subjects available for study groups.</p>
+                </div>
+
+                <button class="primary-btn" onclick="openModal('subjectModal')">
+                    + Add Subject
+                </button>
+            </div>
+
+            <div id="subjectCards" class="cards-grid">
+                <div class="empty-card">Loading subjects...</div>
+            </div>
+
+        </section>
+
+
+        <!-- GROUPS -->
+        <section id="groups" class="page-section">
+
+            <div class="section-toolbar">
+                <div>
+                    <h2>Study Groups</h2>
+                    <p>Create and manage collaborative learning groups.</p>
+                </div>
+
+                <button class="primary-btn" onclick="openModal('groupModal')">
+                    + Create Group
+                </button>
+            </div>
+
+            <div class="filter-bar">
+                <input type="text"
+                       id="groupSearch"
+                       placeholder="Search study groups..."
+                       onkeyup="renderGroups()">
+
+                <select id="groupSubjectFilter" onchange="renderGroups()">
+                    <option value="">All Subjects</option>
+                </select>
+            </div>
+
+            <div id="groupCards" class="cards-grid">
+                <div class="empty-card">Loading groups...</div>
+            </div>
+
+        </section>
+
+
+        <!-- MEMBERSHIPS -->
+        <section id="memberships" class="page-section">
+
+            <div class="section-toolbar">
+                <div>
+                    <h2>Memberships</h2>
+                    <p>Students currently enrolled in study groups.</p>
+                </div>
+
+                <button class="primary-btn" onclick="openModal('membershipModal')">
+                    + Join Group
+                </button>
+            </div>
+
+            <div class="panel">
+                <div class="table-container">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Student</th>
+                            <th>Group</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody id="membershipTable">
+                        <tr>
+                            <td colspan="4" class="empty">Loading memberships...</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- STUDENT MODAL -->
+<div id="studentModal" class="modal">
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <div>
+                <h2>Add Student</h2>
+                <p>Register a new student.</p>
+            </div>
+            <button class="close-btn" onclick="closeModal('studentModal')">&times;</button>
+        </div>
+
+        <form onsubmit="addStudent(event)">
+
+            <label>Student Name</label>
+            <input id="studentName" required placeholder="Enter student name">
+
+            <label>Email</label>
+            <input id="studentEmail" type="email" required placeholder="student@example.com">
+
+            <label>Department</label>
+            <input id="studentDepartment" placeholder="Computer Science">
+
+            <label>Year</label>
+            <select id="studentYear">
+                <option value="1">First Year</option>
+                <option value="2">Second Year</option>
+                <option value="3">Third Year</option>
+                <option value="4">Fourth Year</option>
+            </select>
+
+            <div class="form-actions">
+                <button type="button" class="secondary-btn"
+                        onclick="closeModal('studentModal')">Cancel</button>
+                <button class="primary-btn">Add Student</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<!-- SUBJECT MODAL -->
+<div id="subjectModal" class="modal">
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <div>
+                <h2>Add Subject</h2>
+                <p>Create a subject for study groups.</p>
+            </div>
+            <button class="close-btn" onclick="closeModal('subjectModal')">&times;</button>
+        </div>
+
+        <form onsubmit="addSubject(event)">
+
+            <label>Subject Name</label>
+            <input id="subjectName" required placeholder="Database Management Systems">
+
+            <label>Subject Code</label>
+            <input id="subjectCode" required placeholder="CS301">
+
+            <label>Description</label>
+            <textarea id="subjectDescription"
+                      placeholder="Enter subject description"></textarea>
+
+            <div class="form-actions">
+                <button type="button" class="secondary-btn"
+                        onclick="closeModal('subjectModal')">Cancel</button>
+                <button class="primary-btn">Add Subject</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<!-- GROUP MODAL -->
+<div id="groupModal" class="modal">
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <div>
+                <h2>Create Study Group</h2>
+                <p>Create a collaborative group for students.</p>
+            </div>
+            <button class="close-btn" onclick="closeModal('groupModal')">&times;</button>
+        </div>
+
+        <form onsubmit="addGroup(event)">
+
+            <label>Group Name</label>
+            <input id="groupName" required placeholder="Java Programming Team">
+
+            <label>Subject</label>
+            <select id="groupSubjectId" required>
+                <option value="">Select Subject</option>
+            </select>
+
+            <label>Description</label>
+            <textarea id="groupDescription"
+                      placeholder="Describe the purpose of this group"></textarea>
+
+            <label>Maximum Capacity</label>
+            <input id="groupCapacity"
+                   type="number"
+                   min="1"
+                   max="100"
+                   value="5"
+                   required>
+
+            <div class="form-actions">
+                <button type="button" class="secondary-btn"
+                        onclick="closeModal('groupModal')">Cancel</button>
+                <button class="primary-btn">Create Group</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<!-- MEMBERSHIP MODAL -->
+<div id="membershipModal" class="modal">
+    <div class="modal-box">
+
+        <div class="modal-header">
+            <div>
+                <h2>Join Study Group</h2>
+                <p>Add a student to a study group.</p>
+            </div>
+            <button class="close-btn" onclick="closeModal('membershipModal')">&times;</button>
+        </div>
+
+        <form onsubmit="addMembership(event)">
+
+            <label>Student</label>
+            <select id="membershipStudentId" required>
+                <option value="">Select Student</option>
+            </select>
+
+            <label>Study Group</label>
+            <select id="membershipGroupId" required>
+                <option value="">Select Study Group</option>
+            </select>
+
+            <div class="form-actions">
+                <button type="button" class="secondary-btn"
+                        onclick="closeModal('membershipModal')">Cancel</button>
+                <button class="primary-btn">Join Group</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<div id="toast" class="toast"></div>
 
 <script src="app.js"></script>
+
 </body>
 </html>
