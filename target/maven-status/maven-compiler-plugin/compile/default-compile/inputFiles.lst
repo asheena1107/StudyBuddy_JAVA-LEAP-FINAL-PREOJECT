@@ -1,0 +1,15 @@
+C:\Users\User\Downloads\StudyBuddy (2)\StudyBuddy_Clean\src\main\java\com\studybuddy\controller\MembershipController.java
+C:\Users\User\Downloads\StudyBuddy (2)\StudyBuddy_Clean\src\main\java\com\studybuddy\controller\StudentController.java
+C:\Users\User\Downloads\StudyBuddy (2)\StudyBuddy_Clean\src\main\java\com\studybuddy\controller\StudyGroupController.java
+C:\Users\User\Downloads\StudyBuddy (2)\StudyBuddy_Clean\src\main\java\com\studybuddy\controller\SubjectController.java
+C:\Users\User\Downloads\StudyBuddy (2)\StudyBuddy_Clean\src\main\java\com\studybuddy\entity\Membership.java
+C:\Users\User\Downloads\StudyBuddy (2)\StudyBuddy_Clean\src\main\java\com\studybuddy\entity\Student.java
+C:\Users\User\Downloads\StudyBuddy (2)\StudyBuddy_Clean\src\main\java\com\studybuddy\entity\StudyGroup.java
+C:\Users\User\Downloads\StudyBuddy (2)\StudyBuddy_Clean\src\main\java\com\studybuddy\entity\Subject.java
+C:\Users\User\Downloads\StudyBuddy (2)\StudyBuddy_Clean\src\main\java\com\studybuddy\exception\ApiException.java
+C:\Users\User\Downloads\StudyBuddy (2)\StudyBuddy_Clean\src\main\java\com\studybuddy\exception\GlobalExceptionHandler.java
+C:\Users\User\Downloads\StudyBuddy (2)\StudyBuddy_Clean\src\main\java\com\studybuddy\repository\MembershipRepository.java
+C:\Users\User\Downloads\StudyBuddy (2)\StudyBuddy_Clean\src\main\java\com\studybuddy\repository\StudentRepository.java
+C:\Users\User\Downloads\StudyBuddy (2)\StudyBuddy_Clean\src\main\java\com\studybuddy\repository\StudyGroupRepository.java
+C:\Users\User\Downloads\StudyBuddy (2)\StudyBuddy_Clean\src\main\java\com\studybuddy\repository\SubjectRepository.java
+C:\Users\User\Downloads\StudyBuddy (2)\StudyBuddy_Clean\src\main\java\com\studybuddy\StudyBuddyApplication.java

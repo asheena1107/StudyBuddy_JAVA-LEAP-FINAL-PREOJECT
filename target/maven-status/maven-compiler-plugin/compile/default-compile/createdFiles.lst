@@ -1,0 +1,16 @@
+com\studybuddy\exception\GlobalExceptionHandler.class
+com\studybuddy\entity\StudyGroup.class
+com\studybuddy\entity\Membership.class
+com\studybuddy\entity\Subject.class
+com\studybuddy\repository\StudentRepository.class
+com\studybuddy\StudyBuddyApplication.class
+com\studybuddy\controller\MembershipController.class
+com\studybuddy\controller\StudentController.class
+com\studybuddy\repository\StudyGroupRepository.class
+com\studybuddy\repository\SubjectRepository.class
+com\studybuddy\entity\Student.class
+com\studybuddy\repository\MembershipRepository.class
+com\studybuddy\exception\ApiException.class
+com\studybuddy\controller\StudyGroupController.class
+com\studybuddy\controller\StudyGroupController$GroupRequest.class
+com\studybuddy\controller\SubjectController.class
